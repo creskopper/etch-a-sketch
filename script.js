@@ -16,3 +16,24 @@ function createGridSquare() {
     }
     container.appendChild(divsDocumentFragment);
 }
+
+let squaresList = document.querySelectorAll(".square");
+let isDown = false;
+
+container.addEventListener("mousedown", () => {
+    isDown = true;
+});
+container.addEventListener("mouseup", () => {
+    isDown = false;
+});
+container.addEventListener("mouseleave", () => {
+    isDown = false;
+});
+
+squaresList.forEach(square => {
+    square.addEventListener("mouseover", (e) => {
+        if(!isDown) return;
+        e.preventDefault();
+        square.classList.add("square-colored");
+    })
+});
