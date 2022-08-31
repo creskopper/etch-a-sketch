@@ -1,6 +1,6 @@
 const container = document.querySelector(".container");
 const divsDocumentFragment = new DocumentFragment();
-let squaresPerSide = prompt("Enter squares per side");
+let squaresPerSide = 20;
 let numberOfDivs = squaresPerSide * squaresPerSide;
 
 container.style.gridTemplateColumns = `repeat(${squaresPerSide}, auto)`;
