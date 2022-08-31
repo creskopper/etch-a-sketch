@@ -37,3 +37,10 @@ squaresList.forEach(square => {
         square.classList.add("square-colored");
     })
 });
+
+squaresList.forEach(square => {
+    square.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        square.classList.add("square-colored");
+    })
+});
