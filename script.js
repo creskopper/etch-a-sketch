@@ -1,23 +1,20 @@
 const container = document.querySelector(".container");
 const divsDocumentFragment = new DocumentFragment();
+const newGridBtn = document.getElementById("new-grid");
+const resetGridBtn = document.getElementById("reset-grid");
+const paintGridBtn = document.getElementById("paint-grid");
+const eraseGridBtn = document.getElementById("erase-grid");
 let initialGrid = 16;
 let squaresPerSide = 0;
-let numberOfDivs = squaresPerSide * squaresPerSide;
-const newGridBtn = document.getElementById("new-grid");
 let isDown = false;
+let paint = false;
+let erase = false;
 
 createGridSquare(initialGrid);
 addGridTemplate(initialGrid);
 paintGrid();
+eraseGrid();
 
-newGridBtn.addEventListener("click", () => {
-    squaresPerSide = Number(prompt("Enter squares per side!"));
-    if(!squaresPerSide) return;
-    removeGrid();
-    createGridSquare(squaresPerSide);
-    addGridTemplate(squaresPerSide);
-    paintGrid(squaresPerSide);
-});
 container.addEventListener("mousedown", () => {
     isDown = true;
 });
@@ -26,6 +23,33 @@ container.addEventListener("mouseup", () => {
 });
 container.addEventListener("mouseleave", () => {
     isDown = false;
+});
+
+newGridBtn.addEventListener("click", () => {
+    squaresPerSide = Number(prompt("Enter squares per side!"));
+    paint = false;
+    erase = false;
+    if(!squaresPerSide) return;
+    removeGrid();
+    createGridSquare(squaresPerSide);
+    addGridTemplate(squaresPerSide);
+    paintGrid();
+    eraseGrid();
+});
+resetGridBtn.addEventListener("click", () => {
+    paint = false;
+    erase = false;
+    squaresList.forEach(square => {
+        square.classList.remove("square-colored");
+    })
+});
+paintGridBtn.addEventListener("click", () => {
+    paint = true;
+    erase = false;
+});
+eraseGridBtn.addEventListener("click", () => {
+    paint = false;
+    erase = true;
 });
 
 function createGridSquare(side) {
@@ -44,13 +68,39 @@ function paintGrid() {
         square.addEventListener("mouseover", (e) => {
             if(!isDown) return;
             e.preventDefault();
-            square.classList.add("square-colored");
+            if(paint) {
+                square.classList.add("square-colored");
+            } else return;
         })
     });
     squaresList.forEach(square => {
         square.addEventListener("mousedown", (e) => {
             e.preventDefault();
-            square.classList.add("square-colored");
+            if(paint) {
+                square.classList.add("square-colored");
+            } else return;
+        })
+    });
+}
+
+function eraseGrid() {
+    squaresList = document.querySelectorAll(".square");
+
+    squaresList.forEach(square => {
+        square.addEventListener("mouseover", (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            if(erase) {
+                square.classList.remove("square-colored");
+            } else return;
+        })
+    });
+    squaresList.forEach(square => {
+        square.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            if(erase) {
+                square.classList.remove("square-colored");
+            }
         })
     });
 }
