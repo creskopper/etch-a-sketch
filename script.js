@@ -26,10 +26,15 @@ container.addEventListener("mouseleave", () => {
 });
 
 newGridBtn.addEventListener("click", () => {
-    squaresPerSide = Number(prompt("Enter squares per side!"));
+    do {
+        squaresPerSide = Number(prompt("Enter squares per side! (Maximum 100)"));
+    } while (squaresPerSide > 100);
+    
     paint = false;
     erase = false;
+
     if(!squaresPerSide) return;
+    
     removeGrid();
     createGridSquare(squaresPerSide);
     addGridTemplate(squaresPerSide);
