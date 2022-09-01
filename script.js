@@ -11,8 +11,9 @@ addGridTemplate(initialGrid);
 paintGrid();
 
 newGridBtn.addEventListener("click", () => {
-    removeGrid();
     squaresPerSide = Number(prompt("Enter squares per side!"));
+    if(!squaresPerSide) return;
+    removeGrid();
     createGridSquare(squaresPerSide);
     addGridTemplate(squaresPerSide);
     paintGrid(squaresPerSide);
