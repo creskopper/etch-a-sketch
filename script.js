@@ -45,7 +45,7 @@ resetGridBtn.addEventListener("click", () => {
     paint = false;
     erase = false;
     squaresList.forEach(square => {
-        square.classList.remove("square-colored");
+        square.style.backgroundColor = "";
     })
 });
 paintGridBtn.addEventListener("click", () => {
@@ -74,7 +74,8 @@ function paintGrid() {
             if(!isDown) return;
             e.preventDefault();
             if(paint) {
-                square.classList.add("square-colored");
+                // square.classList.add("square-colored");
+                square.style.backgroundColor = `${generateRandomColor()}`;
             } else return;
         })
     });
@@ -82,7 +83,8 @@ function paintGrid() {
         square.addEventListener("mousedown", (e) => {
             e.preventDefault();
             if(paint) {
-                square.classList.add("square-colored");
+                // square.classList.add("square-colored");
+                square.style.backgroundColor = `${generateRandomColor()}`;
             } else return;
         })
     });
@@ -96,7 +98,8 @@ function eraseGrid() {
             if(!isDown) return;
             e.preventDefault();
             if(erase) {
-                square.classList.remove("square-colored");
+                // square.classList.remove("square-colored");
+                square.style.backgroundColor = "";
             } else return;
         })
     });
@@ -104,7 +107,8 @@ function eraseGrid() {
         square.addEventListener("mousedown", (e) => {
             e.preventDefault();
             if(erase) {
-                square.classList.remove("square-colored");
+                // square.classList.remove("square-colored");
+                square.style.backgroundColor = "";
             }
         })
     });
@@ -122,3 +126,10 @@ function addGridTemplate(init) {
     container.style.gridTemplateRows = `repeat(${init}, auto)`;
 
 }
+
+function generateRandomColor() {
+    r = Math.floor(Math.random() * 255); 
+    g = Math.floor(Math.random() * 255); 
+    b = Math.floor(Math.random() * 255); 
+    return `rgb(${r}, ${g}, ${b})`
+};
