@@ -4,11 +4,15 @@ const newGridBtn = document.getElementById("new-grid");
 const resetGridBtn = document.getElementById("reset-grid");
 const paintGridBtn = document.getElementById("paint-grid");
 const eraseGridBtn = document.getElementById("erase-grid");
+const rainbowPaintBtn = document.getElementById("rainbow-btn");
+const colorPaintBtn = document.getElementById("color-btn");
 let initialGrid = 16;
 let squaresPerSide = 0;
 let isDown = false;
-let paint = false;
+let paint = true;
 let erase = false;
+let rainbow = false;
+let color = true;
 
 createGridSquare(initialGrid);
 addGridTemplate(initialGrid);
@@ -29,9 +33,6 @@ newGridBtn.addEventListener("click", () => {
     do {
         squaresPerSide = Number(prompt("Enter squares per side! (Maximum 100)"));
     } while (squaresPerSide > 100);
-    
-    paint = false;
-    erase = false;
 
     if(!squaresPerSide) return;
     
@@ -42,8 +43,6 @@ newGridBtn.addEventListener("click", () => {
     eraseGrid();
 });
 resetGridBtn.addEventListener("click", () => {
-    paint = false;
-    erase = false;
     squaresList.forEach(square => {
         square.style.backgroundColor = "";
     })
@@ -55,6 +54,14 @@ paintGridBtn.addEventListener("click", () => {
 eraseGridBtn.addEventListener("click", () => {
     paint = false;
     erase = true;
+});
+rainbowPaintBtn.addEventListener("click", () => {
+    color = false;
+    rainbow = true;
+});
+colorPaintBtn.addEventListener("click", () => {
+    rainbow = false;
+    color = true;
 });
 
 function createGridSquare(side) {
@@ -74,8 +81,11 @@ function paintGrid() {
             if(!isDown) return;
             e.preventDefault();
             if(paint) {
-                // square.classList.add("square-colored");
-                square.style.backgroundColor = `${generateRandomColor()}`;
+                if(rainbow) {
+                    square.style.backgroundColor = `${generateRandomColor()}`;
+                } else if(color) {
+                    square.style.backgroundColor = "#000";
+                }
             } else return;
         })
     });
@@ -83,8 +93,11 @@ function paintGrid() {
         square.addEventListener("mousedown", (e) => {
             e.preventDefault();
             if(paint) {
-                // square.classList.add("square-colored");
-                square.style.backgroundColor = `${generateRandomColor()}`;
+                if(rainbow) {
+                    square.style.backgroundColor = `${generateRandomColor()}`;
+                } else if(color) {
+                    square.style.backgroundColor = "#000";
+                }
             } else return;
         })
     });
