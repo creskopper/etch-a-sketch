@@ -45,6 +45,12 @@ body {
     gap: 0.6rem;
 }
 
+.lni.lni-eraser, .lni.lni-brush-alt {
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
 .btn {
     border: 2px solid #fff;
     color: #fff;
