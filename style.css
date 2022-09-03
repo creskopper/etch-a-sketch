@@ -21,8 +21,8 @@ body {
 }
 
 .container {
-    width: 460px;
-    height: 460px;
+    width: 500px;
+    height: 500px;
     margin-block: 4rem;
     background-color: #fff;
     display: grid;
